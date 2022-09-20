@@ -41,11 +41,19 @@ public class Calculator {
     private static double getNumber() {
         System.out.println(ENTER_NUMBER_MESSAGE);
         String input = scanner.next();
+        input = correctDecimal(input);
         while (!checkInputIsDouble(input)) {
             System.out.println(ENTERED_VALUE_NOT_NUMBER_MESSAGE);
             input = scanner.next();
         }
         return Double.parseDouble(input);
+    }
+
+    private static String correctDecimal(String input) {
+        if (input.startsWith(".")) {
+            input = 0 + input;
+        }
+        return input;
     }
 
     private static boolean checkInputIsDouble(String input) {
