@@ -39,14 +39,21 @@ public class Calculator {
 
     private static double getNumber() {
         System.out.println(ENTER_NUMBER_MESSAGE);
-        double number = 0;
-        try {
-            number = Double.parseDouble(scanner.next());
-        } catch (NumberFormatException e) {
+        String input = scanner.next();
+        while (!checkInputIsDouble(input)) {
             System.out.println(ENTERED_VALUE_NOT_NUMBER_MESSAGE);
-            getNumber();
+            input = scanner.next();
         }
-        return number;
+        return Double.parseDouble(input);
+    }
+
+    private static boolean checkInputIsDouble(String input) {
+        try {
+            Double.parseDouble(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private static String getOperation() {
