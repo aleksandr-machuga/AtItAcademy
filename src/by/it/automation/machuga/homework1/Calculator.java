@@ -12,23 +12,23 @@ public class Calculator {
     private static final String ENTER_NUMBER_MESSAGE = "Enter a number:";
     private static final String ENTERED_VALUE_NOT_NUMBER_MESSAGE = "The entered value is not a number. Enter a number:";
     private static final String ENTER_OPERATION_SIGN_MESSAGE = "Enter the operation sign:";
-    private static final String OPERATION_SIGNS = "+-*/";
     private static final String THIS_OPERATION_NOT_SUPPORTED_MESSAGE = "This operation is not supported.";
+    private static final String CANT_DIVIDE_MESSAGE = "It cannot be divided by 0.";
+    private static final String IMPOSSIBLE_OPERATION_MESSAGE = "Operation can't be performed.";
+    private static final String OPERATION_SIGNS = "+-*/";
     private static final String ADD = "+";
     private static final String SUBTRACT = "-";
     private static final String MULTIPLY = "*";
     private static final String DIVIDE = "/";
-    private static final String CANT_DIVIDE_MESSAGE = "It cannot be divided by 0.";
-    private static final String IMPOSSIBLE_OPERATION_MESSAGE = "Operation can't be performed.";
 
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         String userChoice;
         do {
-            int leftOperand = getNumber();
+            double leftOperand = getNumber();
             String operation = getOperation();
-            int rightOperand = getNumber();
+            double rightOperand = getNumber();
             count(leftOperand, rightOperand, operation);
             System.out.println(NEXT_MESSAGE);
             System.out.println(CONTINUATION_REQUEST_MESSAGE);
@@ -37,11 +37,11 @@ public class Calculator {
         System.out.println(EXIT_MESSAGE);
     }
 
-    private static int getNumber() {
+    private static double getNumber() {
         System.out.println(ENTER_NUMBER_MESSAGE);
-        int number = 0;
+        double number = 0;
         try {
-            number = Integer.parseInt(scanner.next());
+            number = Double.parseDouble(scanner.next());
         } catch (NumberFormatException e) {
             System.out.println(ENTERED_VALUE_NOT_NUMBER_MESSAGE);
             getNumber();
@@ -59,7 +59,7 @@ public class Calculator {
         return operation;
     }
 
-    private static void count(int leftOperand, int rightOperand, String operation) {
+    private static void count(double leftOperand, double rightOperand, String operation) {
         switch (operation) {
             case ADD:
                 System.out.println(leftOperand + rightOperand);
@@ -74,7 +74,7 @@ public class Calculator {
                 if (rightOperand == 0) {
                     System.out.println(CANT_DIVIDE_MESSAGE);
                 } else {
-                    System.out.println(1.0 * leftOperand / rightOperand);
+                    System.out.println(leftOperand / rightOperand);
                 }
                 break;
             default:
