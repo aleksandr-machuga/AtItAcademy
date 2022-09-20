@@ -12,7 +12,8 @@ public class Calculator {
     private static final String ENTER_NUMBER_MESSAGE = "Enter a number:";
     private static final String ENTERED_VALUE_NOT_NUMBER_MESSAGE = "The entered value is not a number. Enter a number:";
     private static final String ENTER_OPERATION_SIGN_MESSAGE = "Enter the operation sign:";
-    private static final String THIS_OPERATION_NOT_SUPPORTED_MESSAGE = "This operation is not supported.";
+    private static final String THIS_OPERATION_NOT_SUPPORTED_MESSAGE =
+            "This operation is not supported. " + ENTER_OPERATION_SIGN_MESSAGE;
     private static final String CANT_DIVIDE_MESSAGE = "It cannot be divided by 0.";
     private static final String IMPOSSIBLE_OPERATION_MESSAGE = "Operation can't be performed.";
     private static final String OPERATION_SIGNS = "+-*/";
@@ -59,9 +60,9 @@ public class Calculator {
     private static String getOperation() {
         System.out.println(ENTER_OPERATION_SIGN_MESSAGE);
         String operation = scanner.next();
-        if (!OPERATION_SIGNS.contains(operation)) {
+        while (!OPERATION_SIGNS.contains(operation)) {
             System.out.println(THIS_OPERATION_NOT_SUPPORTED_MESSAGE);
-            getOperation();
+            operation = scanner.next();
         }
         return operation;
     }
