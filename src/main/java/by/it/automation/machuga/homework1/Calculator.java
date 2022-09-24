@@ -1,100 +1,34 @@
 package by.it.automation.machuga.homework1;
 
-import java.util.Scanner;
-
 public class Calculator {
 
-    private static final String CONTINUATION = "y";
-    private static final String CONTINUATION_REQUEST_MESSAGE =
-            String.format("Yes - enter [%s] or enter any key to exit.", CONTINUATION);
-    private static final String NEXT_MESSAGE = "Continue working?";
-    private static final String EXIT_MESSAGE = "The work is completed.";
-    private static final String ENTER_NUMBER_MESSAGE = "Enter a number:";
-    private static final String ENTERED_VALUE_NOT_NUMBER_MESSAGE = "The entered value is not a number. Enter a number:";
-    private static final String ENTER_OPERATION_SIGN_MESSAGE = "Enter the operation sign:";
-    private static final String THIS_OPERATION_NOT_SUPPORTED_MESSAGE =
-            "This operation is not supported. " + ENTER_OPERATION_SIGN_MESSAGE;
-    private static final String CANT_DIVIDE_MESSAGE = "It cannot be divided by 0.";
-    private static final String IMPOSSIBLE_OPERATION_MESSAGE = "Operation can't be performed.";
-    private static final String OPERATION_SIGNS = "+-*/";
-    private static final String ADD = "+";
-    private static final String SUBTRACT = "-";
-    private static final String MULTIPLY = "*";
-    private static final String DIVIDE = "/";
-
-    static Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        String userChoice;
-        do {
-            double leftOperand = getNumber();
-            String operation = getOperation();
-            double rightOperand = getNumber();
-            count(leftOperand, rightOperand, operation);
-            System.out.println(NEXT_MESSAGE);
-            System.out.println(CONTINUATION_REQUEST_MESSAGE);
-            userChoice = scanner.next();
-        } while (userChoice.equalsIgnoreCase(CONTINUATION));
-        System.out.println(EXIT_MESSAGE);
-    }
-
-    private static double getNumber() {
-        System.out.println(ENTER_NUMBER_MESSAGE);
-        String input = scanner.next();
-        input = correctDecimal(input);
-        while (!checkInputIsDouble(input)) {
-            System.out.println(ENTERED_VALUE_NOT_NUMBER_MESSAGE);
-            input = scanner.next();
-        }
-        return Double.parseDouble(input);
-    }
-
-    private static String correctDecimal(String input) {
-        if (input.startsWith(".")) {
-            input = 0 + input;
-        }
-        return input;
-    }
-
-    private static boolean checkInputIsDouble(String input) {
-        try {
-            Double.parseDouble(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private static String getOperation() {
-        System.out.println(ENTER_OPERATION_SIGN_MESSAGE);
-        String operation = scanner.next();
-        while (!OPERATION_SIGNS.contains(operation)) {
-            System.out.println(THIS_OPERATION_NOT_SUPPORTED_MESSAGE);
-            operation = scanner.next();
-        }
-        return operation;
+    public static void interactWithUser() {
+        double leftOperand = CalculatorInputService.getNumber();
+        String operation = CalculatorInputService.getOperation();
+        double rightOperand = CalculatorInputService.getNumber();
+        count(leftOperand, rightOperand, operation);
     }
 
     private static void count(double leftOperand, double rightOperand, String operation) {
         switch (operation) {
-            case ADD:
-                System.out.println(leftOperand + rightOperand);
+            case Constants.ADD:
+                System.out.println(CalculatorOperation.add(leftOperand, rightOperand));
                 break;
-            case SUBTRACT:
-                System.out.println(leftOperand - rightOperand);
+            case Constants.SUBTRACT:
+                System.out.println(CalculatorOperation.subtract(leftOperand, rightOperand));
                 break;
-            case MULTIPLY:
-                System.out.println(leftOperand * rightOperand);
+            case Constants.MULTIPLY:
+                System.out.println(CalculatorOperation.multiply(leftOperand, rightOperand));
                 break;
-            case DIVIDE:
+            case Constants.DIVIDE:
                 if (rightOperand == 0) {
-                    System.out.println(CANT_DIVIDE_MESSAGE);
+                    System.out.println(Constants.CANT_DIVIDE_MESSAGE);
                 } else {
-                    System.out.println(leftOperand / rightOperand);
+                    System.out.println(CalculatorOperation.divide(leftOperand, rightOperand));
                 }
                 break;
             default:
-                System.out.println(IMPOSSIBLE_OPERATION_MESSAGE);
+                System.out.println(Constants.IMPOSSIBLE_OPERATION_MESSAGE);
         }
     }
 }
