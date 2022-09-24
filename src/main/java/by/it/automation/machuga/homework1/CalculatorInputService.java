@@ -12,7 +12,7 @@ public class CalculatorInputService {
         return Double.parseDouble(input);
     }
 
-    public static String correctDecimal(String input) {
+    private static String correctDecimal(String input) {
         if (input.startsWith(".")) {
             input = 0 + input;
         }
