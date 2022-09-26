@@ -11,7 +11,7 @@ public interface Constants {
     String ENTERED_VALUE_NOT_NUMBER_MESSAGE = "The entered value is not a number. Enter a number:";
     String ENTER_OPERATION_SIGN_MESSAGE = "Enter the operation sign:";
     String THIS_OPERATION_NOT_SUPPORTED_MESSAGE =
-                    "This operation is not supported. " + ENTER_OPERATION_SIGN_MESSAGE;
+            "This operation is not supported. " + ENTER_OPERATION_SIGN_MESSAGE;
     String CANT_DIVIDE_MESSAGE = "It cannot be divided by 0.";
     String IMPOSSIBLE_OPERATION_MESSAGE = "Operation can't be performed.";
     String OPERATION_SIGNS = "+-*/";
@@ -19,4 +19,5 @@ public interface Constants {
     String SUBTRACT = "-";
     String MULTIPLY = "*";
     String DIVIDE = "/";
+    String DIVISION_BY_ZERO = "Division by zero";
 }

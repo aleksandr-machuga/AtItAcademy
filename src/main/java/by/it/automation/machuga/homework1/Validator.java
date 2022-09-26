@@ -11,6 +11,6 @@ public class Validator {
     }
 
     public static boolean checkOperationIsValid(String operation) {
-        return !Constants.OPERATION_SIGNS.contains(operation);
+        return Constants.OPERATION_SIGNS.contains(operation);
     }
 }

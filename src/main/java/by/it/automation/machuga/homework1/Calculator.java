@@ -5,23 +5,23 @@ public class Calculator {
         Object result;
         switch (operation) {
             case Constants.ADD:
-                result=CalculatorOperation.add(leftOperand, rightOperand);
+                result = CalculatorOperation.add(leftOperand, rightOperand);
                 break;
             case Constants.SUBTRACT:
-                result=CalculatorOperation.subtract(leftOperand, rightOperand);
+                result = CalculatorOperation.subtract(leftOperand, rightOperand);
                 break;
             case Constants.MULTIPLY:
-                result=CalculatorOperation.multiply(leftOperand, rightOperand);
+                result = CalculatorOperation.multiply(leftOperand, rightOperand);
                 break;
             case Constants.DIVIDE:
-                if (rightOperand == 0) {
-                    result=Constants.CANT_DIVIDE_MESSAGE;
-                } else {
-                    result=CalculatorOperation.divide(leftOperand, rightOperand);
+                try {
+                    result = CalculatorOperation.divide(leftOperand, rightOperand);
+                } catch (ArithmeticException e) {
+                    result = Constants.CANT_DIVIDE_MESSAGE;
                 }
                 break;
             default:
-                result=Constants.IMPOSSIBLE_OPERATION_MESSAGE;
+                result = Constants.IMPOSSIBLE_OPERATION_MESSAGE;
         }
         return result;
     }
